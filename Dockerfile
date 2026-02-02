@@ -23,10 +23,10 @@ WORKDIR /app
 # Copy project files
 COPY . .
 
-# Install PHP dependencies
-RUN composer install --no-dev --optimize-autoloader
-
-# Make start script executable
+    # Install PHP dependencies
+    # Using --ignore-platform-req=php to allow installation on PHP 8.3
+    # even if some packages declare they need PHP 8.4
+    RUN composer install --no-dev --optimize-autoloader --ignore-platform-req=php# Make start script executable
 RUN chmod +x start.sh
 
 # Create storage directories with proper permissions
